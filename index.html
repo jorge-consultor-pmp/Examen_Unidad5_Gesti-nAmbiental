@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen de Gestión Ambiental Empresarial - UNIDAD 5 (60 Preguntas)</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #007bff;
+            text-align: center;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #28a745;
+            margin-top: 35px;
+            border-bottom: 1px solid #28a745;
+            padding-bottom: 5px;
+        }
+        /* --- Controles de Examen y Temporizador --- */
+        #controls {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        #timer {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #dc3545;
+        }
+        #exam-form {
+            display: none; /* Ocultar hasta que se inicie */
+        }
+        #start-form input[type="text"],
+        #start-form input[type="email"] {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 250px;
+        }
+        #start-button, #submit-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        #start-button:hover, #submit-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* --- Estilos de Pregunta --- */
+        .question-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            background-color: #ffffff;
+        }
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #555;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 8px;
+            padding: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.1s;
+        }
+        .options label:hover {
+            background-color: #f0f0f0;
+        }
+        input[type="radio"] {
+            margin-right: 8px;
+        }
+
+        /* --- Estilos de Revisión/Resultado --- */
+        .correct {
+            background-color: #d4edda; /* Verde claro */
+            border: 1px solid #c3e6cb;
+        }
+        .incorrect {
+            background-color: #f8d7da; /* Rojo claro */
+            border: 1px solid #f5c6cb;
+        }
+        .justification-display {
+            font-size: 0.9em;
+            color: #856404;
+            padding: 8px;
+            margin-top: 5px;
+            background-color: #fff3cd;
+            border-radius: 4px;
+        }
+        #results {
+            text-align: center;
+            padding: 30px;
+            border: 2px dashed #007bff;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        #score-display {
+            font-size: 2em;
+            color: #28a745;
+            margin: 15px 0;
+        }
+        #report-section h3 {
+            color: #0056b3;
+            margin-top: 30px;
+        }
+        #report-data {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        #report-data th, #report-data td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        #report-data th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Examen de Gestión Ambiental Empresarial - UNIDAD 5 (60 Preguntas)</h1>
+    
+    <div id="controls">
+        <div id="start-form">
+            <input type="text" id="student-name" placeholder="Nombre Completo" required>
+            <input type="email" id="student-email" placeholder="Correo Electrónico" required>
+            <button id="start-button">Iniciar Examen</button>
+        </div>
+        <div id="timer">Tiempo restante: --:--</div>
+    </div>
+
+    <div id="results" style="display: none;">
+        <h2>Examen Finalizado</h2>
+        <p>Gracias por completar la prueba, <span id="final-name"></span>.</p>
+        <p>Tu puntuación final es:</p>
+        <div id="score-display"></div>
+        <button id="review-button">Revisar Respuestas</button>
+        <div id="report-section" style="display: none;">
+            <h3>Informe de Resultados (Para el Docente)</h3>
+            <p>Se ha guardado un resumen de la calificación. El informe completo ha sido enviado a la consola del navegador.</p>
+            <table id="report-data"></table>
+        </div>
+    </div>
+
+    <form id="exam-form">
+        
+        <h2>1. Producción más Limpia (PML) (Preguntas 1-10)</h2>
+
+        <div class="question-card" data-correct="c">
+            <div class="question-text">1. ¿Cuál de los siguientes principios de la Producción más Limpia se enfoca en la reducción de residuos y emisiones desde la etapa de diseño del producto o proceso?</div>
+            <div class="options">
+                <label><input type="radio" name="q1" value="a"> a) Tratamiento al final del proceso</label>
+                <label><input type="radio" name="q1" value="b"> b) Recuperación de energía</label>
+                <label><input type="radio" name="q1" value="c"> c) Prevención de la contaminación en la fuente</label>
+                <label><input type="radio" name="q1" value="d"> d) Remediación ambiental</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: La PML es una estrategia preventiva e integrada que busca evitar la generación de residuos y emisiones desde la concepción del proceso o producto.</div>
+        </div>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">2. La Producción más Limpia busca exclusivamente beneficios ambientales, sin considerar la rentabilidad económica de la empresa. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q2" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q2" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: La PML busca un triple beneficio: económico, ambiental y social (seguridad y salud humana).</div>
+        </div>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">3. ¿Cuál de los siguientes factores representa una barrera organizacional común para la implementación exitosa de la Producción más Limpia (PML)?</div>
+            <div class="options">
+                <label><input type="radio" name="q3" value="a"> a) La imposibilidad técnica de sustituir solventes.</label>
+                <label><input type="radio" name="q3" value="b"> b) La falta de apoyo gerencial o la resistencia al cambio del personal.</label>
+                <label><input type="radio" name="q3" value="c"> c) El costo cero de la disposición final de residuos.</label>
+                <label><input type="radio" name="q3" value="d"> d) La existencia de demasiadas certificaciones ISO.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: Las barreras organizacionales, como la resistencia al cambio y la falta de apoyo de la dirección, son un obstáculo clave para la PML.</div>
+        </div>
+
+        <div class="question-card" data-correct="a">
+            <div class="question-text">4. El orden cronológico correcto de las etapas del ciclo de implementación de Producción más Limpia es: Planificación → Diagnóstico Inicial → Identificación de Opciones de Mejora → Implementación y Seguimiento. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q4" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q4" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: Los pasos clave son: Inicio del ciclo (Planificación), Análisis de la situación actual (Diagnóstico), Definición y opciones de mejora, y Seguimiento, culminación y evaluación (Implementación).</div>
+        </div>
+
+        <div class="question-card" data-correct="c">
+            <div class="question-text">5. ¿Qué tipo de medida de Producción más Limpia se relaciona con la sustitución de materiales peligrosos por alternativas menos tóxicas en la fabricación de un producto?</div>
+            <div class="options">
+                <label><input type="radio" name="q5" value="a"> a) Reutilización de agua.</label>
+                <label><input type="radio" name="q5" value="b"> b) Optimización de procesos.</label>
+                <label><input type="radio" name="q5" value="c"> c) Modificación del producto.</label>
+                <label><input type="radio" name="q5" value="d"> d) Buenas prácticas operativas.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: La modificación del producto (o su diseño) para usar materiales menos tóxicos es una medida clave a nivel de producto en PML.</div>
+        </div>
+
+        <div class="question-card" data-correct="c">
+            <div class="question-text">6. Según el caso de Yeast Pharmacuetics de México, la implementación de PML mediante el rediseño de maquinaria para evitar desperdicio de aceite generó un ahorro de aproximadamente:</div>
+            <div class="options">
+                <label><input type="radio" name="q6" value="a"> a) US$ 2.110 al año.</label>
+                <label><input type="radio" name="q6" value="b"> b) US$ 5.076 al año.</label>
+                <label><input type="radio" name="q6" value="c"> c) US$ 18.700 al año.</label>
+                <label><input type="radio" name="q6" value="d"> d) US$ 16.590 al año.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: Para solucionar la pérdida de aceite, rediseñaron parte de la maquinaria, lo que generó un ahorro de US$18.700.</div>
+        </div>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">7. El alcance de la Producción más Limpia se limita a los procesos internos de la empresa, sin considerar factores externos como las demandas del mercado por productos sostenibles. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q7" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q7" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: El alcance de PML es amplio y también tiene que ver con factores externos como las políticas macroeconómicas, aspectos financieros, y las demandas en el mercado por productos sostenibles.</div>
+        </div>
+
+        <div class="question-card" data-correct="c">
+            <div class="question-text">8. ¿Qué medida de PML a nivel de procesos representa un **cambio en tecnología**?</div>
+            <div class="options">
+                <label><input type="radio" name="q8" value="a"> a) Control de consumo de salidas de agua.</label>
+                <label><input type="radio" name="q8" value="b"> b) Optimizar mantenimiento de válvulas.</label>
+                <label><input type="radio" name="q8" value="c"> c) Utilizar limpieza mecánica en vez de limpieza con solventes.</label>
+                <label><input type="radio" name="q8" value="d"> d) Reciclaje interno del agua empleada en el proceso.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: Un cambio en tecnología puede incluir la limpieza mecánica en vez de limpieza con solventes y/o detergentes.</div>
+        </div>
+
+        <div class="question-card" data-correct="a">
+            <div class="question-text">9. Los Factores Socioculturales, Tecnológicos, Legales y Ambientales son clasificados como **Factores de Competitividad Empresarial** que influyen en la PML. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q9" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q9" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: El documento lista factores económicos, tecnológicos, legales, políticos, socioculturales y ambientales como factores de competitividad empresarial.</div>
+        </div>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">10. La PML se define como una estrategia ambiental preventiva e integrada enfocada hacia procesos productivos, productos y servicios, a fin de:</div>
+            <div class="options">
+                <label><input type="radio" name="q10" value="a"> a) Reemplazar el sistema de gestión ambiental ISO 14001.</label>
+                <label><input type="radio" name="q10" value="b"> b) Reducir costos, incentivar innovaciones tecnológicas y reducir riesgos relevantes al ser humano y al medio ambiente.</label>
+                <label><input type="radio" name="q10" value="c"> c) Cumplir exclusivamente con la legislación ambiental de carácter obligatorio.</label>
+                <label><input type="radio" name="q10" value="d"> d) Subsidiar la producción de energía renovable a nivel nacional.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: La PML se define a fin de reducir costos, incentivar innovaciones tecnológicas y reducir los riesgos relevantes al ser humano y al medio ambiente.</div>
+        </div>
+
+        <h2>2. Auditoría Ambiental en Bolivia (Preguntas 11-20)</h2>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">11. Según la Ley 1333 de Medio Ambiente de Bolivia, ¿cuál es el rol principal de la Auditoría Ambiental?</div>
+            <div class="options">
+                <label><input type="radio" name="q11" value="a"> a) Valorar económicamente los daños ambientales.</label>
+                <label><input type="radio" name="q11" value="b"> b) Verificar el grado de cumplimiento legal y de políticas ambientales.</label>
+                <label><input type="radio" name="q11" value="c"> c) Planificar nuevas políticas y programas ambientales del Estado.</label>
+                <label><input type="radio" name="q11" value="d"> d) Emitir sanciones directas por incumplimiento.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: La Auditoría Ambiental es un instrumento de control de la calidad ambiental que lleva a la verificación del grado de cumplimiento de disposiciones legales, políticas ambientales y/o prácticas aceptadas.</div>
+        </div>
+
+        <div class="question-card" data-correct="a">
+            <div class="question-text">12. Una Auditoría Ambiental Gubernamental en Bolivia puede tener como objeto de examen los privilegios ambientales otorgados por el Estado. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q12" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q12" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: Los objetos de examen pueden ser SGA, acciones asociadas a la gestión ambiental, privilegios ambientales otorgados por el Estado, medio ambiente y recursos naturales.</div>
+        </div>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">13. ¿Qué fase de la Auditoría Ambiental incluye la inspección in situ y la caracterización de la línea base del entorno?</div>
+            <div class="options">
+                <label><input type="radio" name="q13" value="a"> a) Fase 1: Planificación.</label>
+                <label><input type="radio" name="q13" value="b"> b) Fase 2: Actividades en el Sitio a auditar.</label>
+                <label><input type="radio" name="q13" value="c"> c) Fase 3: Reporte final de auditoría ambiental.</label>
+                <label><input type="radio" name="q13" value="d"> d) Acciones Post Auditoría.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: La Fase 2 es la de Actividades en el Sitio a auditar, la cual incluye la inspección y la caracterización de la Línea Base.</div>
+        </div>
+
+        <div class="question-card" data-correct="a">
+            <div class="question-text">14. El principio de auditoría ISO 19011 que obliga a que los hallazgos sean verificables y objetivos es el Enfoque Basado en la Evidencia. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q14" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q14" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: El Enfoque Basado en la Evidencia (Método racional) indica que la evidencia debe ser verificable, siendo un principio fundamental de la ISO 19011.</div>
+        </div>
+
+        <div class="question-card" data-correct="c">
+            <div class="question-text">15. ¿Qué tipo de auditoría ambiental es realizada por la propia organización para revisar su desempeño y cumplimiento de normativas internas y externas?</div>
+            <div class="options">
+                <label><input type="radio" name="q15" value="a"> a) Auditoría Ambiental Externa</label>
+                <label><input type="radio" name="q15" value="b"> b) Auditoría de Cumplimiento</label>
+                <label><input type="radio" name="q15" value="c"> c) Auditoría Ambiental Interna</label>
+                <label><input type="radio" name="q15" value="d"> d) Auditoría de Impacto Ambiental</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: La Auditoría Ambiental Interna es la "Evaluación realizada por la propia organización para revisar su desempeño ambiental" y asegurar el cumplimiento de normativas internas y externas.</div>
+        </div>
+
+        <div class="question-card" data-correct="d">
+            <div class="question-text">16. ¿Qué tipo de Auditoría Ambiental se enfoca específicamente en la evaluación del cumplimiento de normativas y regulaciones ambientales (leyes y reglamentos)?</div>
+            <div class="options">
+                <label><input type="radio" name="q16" value="a"> a) Auditoría Ambiental Externa.</label>
+                <label><input type="radio" name="q16" value="b"> b) Auditoría de Impacto Ambiental.</label>
+                <label><input type="radio" name="q16" value="c"> c) Auditoría de Gestión Ambiental.</label>
+                <label><input type="radio" name="q16" value="d"> d) Auditoría de Cumplimiento.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: La Auditoría de Cumplimiento tiene como definición ser una "Evaluación centrada en el cumplimiento de normativas y regulaciones ambientales".</div>
+        </div>
+
+        <div class="question-card" data-correct="a">
+            <div class="question-text">17. Una de las justificaciones para la Auditoría Ambiental es que se aplica después de que las medidas de prevención hayan sido implementadas en una AOP. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q17" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q17" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: Las auditorías ambientales se aplican durante y después de la realización de la AOP, contrastando con las medidas que se aplican antes, durante y después.</div>
+        </div>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">18. ¿Cuál es uno de los objetivos clave de la Auditoría Ambiental?</div>
+            <div class="options">
+                <label><input type="radio" name="q18" value="a"> a) Elaborar el Balance de Materiales.</label>
+                <label><input type="radio" name="q18" value="b"> b) Conocer y evaluar la situación ambiental y riesgos ambientales.</label>
+                <label><input type="radio" name="q18" value="c"> c) Diseñar la política ambiental de la empresa.</label>
+                <label><input type="radio" name="q18" value="d"> d) Establecer el precio de venta de los subproductos.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: La AA busca **conocer y evaluar la situación ambiental y riesgos ambientales** de una empresa, así como establecer necesidades ambientales.</div>
+        </div>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">19. ¿Cuál de los siguientes es un motivo clave para realizar una Auditoría Ambiental, relacionado con el mercado y los grupos de interés?</div>
+            <div class="options">
+                <label><input type="radio" name="q19" value="a"> a) Identificar posibles ahorros de costos.</label>
+                <label><input type="radio" name="q19" value="b"> b) Fortalecer la imagen corporativa.</label>
+                <label><input type="radio" name="q19" value="c"> c) Verificar que el sistema de gestión ambiental funcione correctamente.</label>
+                <label><input type="radio" name="q19" value="d"> d) Comprobar el cumplimiento de la normativa medioambiental.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: Fortalecer la imagen corporativa es un motivo clave que impacta la relación con la comunidad y órganos gubernamentales.</div>
+        </div>
+
+        <div class="question-card" data-correct="a">
+            <div class="question-text">20. El Informe Legal en la Fase 3 del Reporte Final de Auditoría debe incluir la identificación de incumplimientos a disposiciones legales. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q20" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q20" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: El Informe legal en la Fase 3 debe incluir la identificación de incumplimientos a disposiciones legales (ej. falta de compromisos previos).</div>
+        </div>
+
+        <h2>3. Ecoetiquetas (Preguntas 21-30)</h2>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">21. ¿Qué tipo de Ecoetiqueta (ISO 14020) son las autodeclaraciones ambientales realizadas por el propio fabricante sin certificación de tercera parte?</div>
+            <div class="options">
+                <label><input type="radio" name="q21" value="a"> a) Tipo I (ISO 14024)</label>
+                <label><input type="radio" name="q21" value="b"> b) Tipo II (ISO 14021)</label>
+                <label><input type="radio" name="q21" value="c"> c) Tipo III (ISO 14025)</label>
+                <label><input type="radio" name="q21" value="d"> d) Etiquetas obligatorias</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: Las etiquetas Tipo II son autodeclaraciones ambientales, como el símbolo universal de reciclaje sin porcentaje.</div>
+        </div>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">22. La etiqueta ecológica de la Unión Europea ("La Flor") es un ejemplo de Etiquetado Ambiental Tipo III, que proporciona datos cuantificados del ciclo de vida del producto. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q22" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q22" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: "La Flor" es una etiqueta Tipo I (ISO 14024). El etiquetado Tipo III es una Declaración Ambiental de Producto que provee información cuantificada basada en ACV.</div>
+        </div>
+
+        <div class="question-card" data-correct="a">
+            <div class="question-text">23. Las Declaraciones Ambientales de Producto (DAP), o etiquetas Tipo III, se caracterizan por basarse en el Análisis de Ciclo de Vida (ACV) para ofrecer información cuantificada. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q23" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q23" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: Las DAP (Etiquetado Tipo III) utilizan el ACV para proporcionar datos objetivos y comparables sobre el comportamiento ambiental de un producto.</div>
+        </div>
+
+        <div class="question-card" data-correct="c">
+            <div class="question-text">24. ¿Cuál es el objetivo principal de una Ecoetiqueta Tipo I?</div>
+            <div class="options">
+                <label><input type="radio" name="q24" value="a"> a) Informar al consumidor sobre el riesgo del producto.</label>
+                <label><input type="radio" name="q24" value="b"> b) Certificar el cumplimiento de una única característica ambiental.</label>
+                <label><input type="radio" name="q24" value="c"> c) Identificar productos que poseen el mejor desempeño ambiental dentro de su categoría.</label>
+                <label><input type="radio" name="q24" value="d"> d) Proporcionar un anuncio de políticas internas de la empresa.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: Las ecoetiquetas Tipo I tienen como objetivo identificar productos y servicios que poseen el mejor desempeño ambiental dentro de su categoría.</div>
+        </div>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">25. ¿Qué certifica la etiqueta FSC (Forest Stewardship Council)?</div>
+            <div class="options">
+                <label><input type="radio" name="q25" value="a"> a) Que el producto es 100% reciclable.</label>
+                <label><input type="radio" name="q25" value="b"> b) Que la madera o papel proviene de bosques gestionados de forma sostenible.</label>
+                <label><input type="radio" name="q25" value="c"> c) La eficiencia energética de electrodomésticos.</label>
+                <label><input type="radio" name="q25" value="d"> d) Que el producto es libre de químicos nocivos.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: FSC es un estándar global que asegura que la gestión forestal cumple con criterios ambientales y sociales rigurosos.</div>
+        </div>
+
+        <div class="question-card" data-correct="c">
+            <div class="question-text">26. ¿Cuál es la característica principal de los criterios ecológicos para la Etiqueta Ecológica Europea ("La Flor")?</div>
+            <div class="options">
+                <label><input type="radio" name="q26" value="a"> a) Se basan solo en el porcentaje de material reciclado.</label>
+                <label><input type="radio" name="q26" value="b"> b) Son obligatorios para todos los productos en la UE.</label>
+                <label><input type="radio" name="q26" value="c"> c) Se basan en el mejor desempeño ambiental comparativo de los productos.</label>
+                <label><input type="radio" name="q26" value="d"> d) Solo aplican a los productos alimenticios y agrícolas.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: La etiqueta ecológica de la Unión Europea busca identificar los productos y servicios que tienen mejor desempeño ambiental.</div>
+        </div>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">27. Una autodeclaración ambiental (Tipo II) está siempre verificada por una tercera parte independiente para garantizar su veracidad. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q27" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q27" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: Las etiquetas Tipo II (ISO 14021) son autodeclaraciones del fabricante; la verificación por terceros corresponde a las etiquetas Tipo I y Tipo III.</div>
+        </div>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">28. ¿Cuál es el segundo instrumento, aparte de los Programas de Ecoetiquetado, que define al Mercado con sensibilidad al desempeño ambiental?</div>
+            <div class="options">
+                <label><input type="radio" name="q28" value="a"> a) La Certificación de Tercera Parte.</label>
+                <label><input type="radio" name="q28" value="b"> b) La Publicidad Ambiental.</label>
+                <label><input type="radio" name="q28" value="c"> c) Los Estándares de Gestión ISO 14001.</label>
+                <label><input type="radio" name="q28" value="d"> d) Las Etiquetas Obligatorias.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: El diagrama de la fuente muestra el Mercado con sensibilidad al desempeño ambiental dividido en Publicidad ambiental y Programas de ecoetiquetado.</div>
+        </div>
+
+        <div class="question-card" data-correct="a">
+            <div class="question-text">29. El Valor Percibido del producto por el consumidor verde está directamente influenciado por la Calidad Percibida y el Costo Percibido. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q29" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q29" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: El diagrama de la visión del consumidor verde muestra que la Calidad percibida y el Costo percibido son factores que influyen directamente en el Valor percibido.</div>
+        </div>
+
+        <div class="question-card" data-correct="c">
+            <div class="question-text">30. En los criterios ecológicos de la ecoetiqueta europea para detergentes de ropa, se establece la limitación de la cantidad de detergente usado y que solo se permiten detergentes:</div>
+            <div class="options">
+                <label><input type="radio" name="q30" value="a"> a) En polvo.</label>
+                <label><input type="radio" name="q30" value="b"> b) Líquidos.</label>
+                <label><input type="radio" name="q30" value="c"> c) Compactos.</label>
+                <label><input type="radio" name="q30" value="d"> d) Biodegradables al 100%.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: Los criterios establecen que "Solo se permiten detergentes compactos" ($<100g/lavado$).</div>
+        </div>
+
+        <h2>4. Economía Circular (Preguntas 31-40)</h2>
+
+        <div class="question-card" data-correct="d">
+            <div class="question-text">31. ¿Cuál de las siguientes acciones NO es un principio fundamental del modelo de Economía Circular?</div>
+            <div class="options">
+                <label><input type="radio" name="q31" value="a"> a) Eliminar residuos y contaminación desde el diseño.</label>
+                <label><input type="radio" name="q31" value="b"> b) Regenerar los sistemas naturales.</label>
+                <label><input type="radio" name="q31" value="c"> c) Mantener productos y materiales en uso.</label>
+                <label><input type="radio" name="q31" value="d"> d) Tomar-Hacer-Desechar.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: "Tomar-Hacer-Desechar" es el modelo de la Economía Lineal, el cual la Economía Circular busca sustituir.</div>
+        </div>
+
+        <div class="question-card" data-correct="a">
+            <div class="question-text">32. La simbiosis industrial es un concepto de la Economía Circular donde los subproductos de una industria se convierten en materias primas para otra. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q32" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q32" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: Visualizar la oportunidad de generar acuerdos de simbiosis industrial es uno de los beneficios de la Economía Circular.</div>
+        </div>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">33. ¿Qué concepto de la Economía Circular engloba compartir, arrendar, reutilizar, reparar, renovar y reciclar materiales y productos existentes durante el mayor tiempo posible?</div>
+            <div class="options">
+                <label><input type="radio" name="q33" value="a"> a) El Modelo de Negocio de Eficiencia de Recursos.</label>
+                <label><input type="radio" name="q33" value="b"> b) El Modelo de Producción y Consumo (Circularidad).</label>
+                <label><input type="radio" name="q33" value="c"> c) El Sistema de Gestión Ambiental ISO 14001.</label>
+                <label><input type="radio" name="q33" value="d"> d) La Certificación de Impacto Ambiental.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: El documento define la Economía Circular (circularidad) como un modelo de producción y consumo que implica estas acciones de prolongación de vida útil.</div>
+        </div>
+
+        <div class="question-card" data-correct="a">
+            <div class="question-text">34. Un beneficio de la Economía Circular es la reducción de la dependencia de recursos vírgenes y la disminución de la generación de residuos. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q34" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q34" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: El modelo de la EC busca "menos materias primas, menos residuos, menos emisiones," lo que implica la reducción de la dependencia de recursos vírgenes y la generación de residuos.</div>
+        </div>
+
+        <div class="question-card" data-correct="c">
+            <div class="question-text">35. ¿Cuál es la diferencia clave en el flujo de materiales entre el modelo Lineal y el Circular?</div>
+            <div class="options">
+                <label><input type="radio" name="q35" value="a"> a) El modelo Lineal prioriza el reciclaje y la reutilización.</label>
+                <label><input type="radio" name="q35" value="b"> b) El modelo Circular se basa en el "tomar, hacer, desechar".</label>
+                <label><input type="radio" name="q35" value="c"> c) El modelo Circular reintroduce los residuos en el sistema productivo, cerrando el ciclo.</label>
+                <label><input type="radio" name="q35" value="d"> d) El modelo Lineal utiliza más recursos renovables.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: El modelo Circular cierra el ciclo de los materiales a través del diseño, la producción, la distribución, el consumo y el reciclaje, en contraste con el modelo lineal que termina en el residuo.</div>
+        </div>
+
+        <div class="question-card" data-correct="c">
+            <div class="question-text">36. Después de la **Producción** en el ciclo de la Economía Circular (diagrama del Parlamento Europeo), la siguiente etapa es:</div>
+            <div class="options">
+                <label><input type="radio" name="q36" value="a"> a) Diseño sostenible.</label>
+                <label><input type="radio" name="q36" value="b"> b) Recogida.</label>
+                <label><input type="radio" name="q36" value="c"> c) Distribución.</label>
+                <label><input type="radio" name="q36" value="d"> d) Gestión de residuos.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: El flujo de la Economía Circular, después de la Producción, sigue hacia la Distribución y luego al Consumo, Reutilización, y Reparación.</div>
+        </div>
+
+        <div class="question-card" data-correct="a">
+            <div class="question-text">37. Uno de los beneficios de la Economía Circular es la oportunidad de generar acuerdos de simbiosis industrial que otorguen beneficios en la industria. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q37" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q37" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: Visualizar la oportunidad de generar acuerdos de simbiosis industrial es uno de los beneficios de la Economía Circular.</div>
+        </div>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">38. ¿Cuál es uno de los desafíos globales que la Economía Circular busca abordar?</div>
+            <div class="options">
+                <label><input type="radio" name="q38" value="a"> a) La baja rentabilidad de la industria extractiva.</label>
+                <label><input type="radio" name="q38" value="b"> b) La pérdida de biodiversidad.</label>
+                <label><input type="radio" name="q38" value="c"> c) La falta de certificación ISO 9001.</label>
+                <label><input type="radio" name="q38" value="d"> d) La escasez de mano de obra en el sector de servicios.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: La EC tiene como objetivo abordar desafíos globales como el cambio climático, la pérdida de biodiversidad, la gestión de los desechos y la contaminación.</div>
+        </div>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">39. ¿Cuál es la principal diferencia conceptual entre el modelo de Economía Lineal y la Economía Circular, según sus diagramas de flujo?</div>
+            <div class="options">
+                <label><input type="radio" name="q39" value="a"> a) La economía lineal maximiza la reutilización y la circular minimiza los desechos.</label>
+                <label><input type="radio" name="q39" value="b"> b) La economía circular reemplaza la producción por la re-elaboración y el reciclaje, cerrando el ciclo.</label>
+                <label><input type="radio" name="q39" value="c"> c) La economía lineal es más eficiente energéticamente que la circular.</label>
+                <label><input type="radio" name="q39" value="d"> d) La economía circular se enfoca solo en el ciclo biológico de materiales.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: El modelo circular busca cerrar el ciclo (Producción y reelaboración, Reciclado) al mantener los productos y materiales en uso.</div>
+        </div>
+
+        <div class="question-card" data-correct="a">
+            <div class="question-text">40. Un objetivo de la Economía Circular es transformar la industria a una base sustentable y alcanzar un público con características altamente diferenciadas. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q40" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q40" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: Un beneficio de la EC es "Transformarse a una industria sustentable y llegar a un público altamente diferenciado."</div>
+        </div>
+
+        <h2>5. Mercados Verdes (Preguntas 41-50)</h2>
+
+        <div class="question-card" data-correct="c">
+            <div class="question-text">41. Según Polonsky (1999), ¿cómo se define el Mercadeo Verde o Green Marketing?</div>
+            <div class="options">
+                <label><input type="radio" name="q41" value="a"> a) La venta exclusiva de productos orgánicos.</label>
+                <label><input type="radio" name="q41" value="b"> b) La promoción de productos con ecoetiquetas.</label>
+                <label><input type="radio" name="q41" value="c"> c) Una aproximación integral que revalúa cómo la organización responde al consumidor y reduce el perjuicio ambiental.</label>
+                <label><input type="radio" name="q41" value="d"> d) El cumplimiento de regulaciones ambientales obligatorias.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: El Mercadeo Verde es la aproximación integral que continuamente revalúa cómo la organización puede responder adecuadamente a sus objetivos y a las necesidades del consumidor, mientras que reduce el perjuicio que dichas actividades generan sobre el ambiente (Polonsky, 1999).</div>
+        </div>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">42. En los Mercados Verdes, la "oferta" se refiere únicamente a los productos físicos con bajo impacto ambiental, excluyendo los servicios. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q42" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q42" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: La oferta de Mercados Verdes incluye tanto Productos Verdes (bienes físicos) como Servicios Ambientales (ej. ecoturismo, consultoría).</div>
+        </div>
+
+        <div class="question-card" data-correct="c">
+            <div class="question-text">43. ¿Qué elemento del Mercado Verde implica considerar el impacto ambiental desde la extracción de materias primas hasta su eliminación o reciclaje?</div>
+            <div class="options">
+                <label><input type="radio" name="q43" value="a"> a) Producción Sostenible.</label>
+                <label><input type="radio" name="q43" value="b"> b) Consumo Responsable.</label>
+                <label><input type="radio" name="q43" value="c"> c) Ciclo de Vida del Producto.</label>
+                <label><input type="radio" name="q43" value="d"> d) Comercio Justo y Local.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: El análisis del Ciclo de Vida del Producto implica considerar el impacto ambiental en todas las etapas, desde la extracción de materias primas hasta la eliminación o reciclaje del mismo.</div>
+        </div>
+
+        <div class="question-card" data-correct="a">
+            <div class="question-text">44. El Comercio Justo y Local apoya a los Mercados Verdes al reducir la huella de carbono asociada al transporte de bienes. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q44" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q44" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: El Comercio Justo y Local apoya a los Mercados Verdes al reducir la huella de carbono asociada al transporte y apoyar el desarrollo sostenible de las comunidades.</div>
+        </div>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">45. ¿Cuál es la principal distinción entre Clientes Verdes Business to Consumer (B2C) y Business to Business (B2B)?</div>
+            <div class="options">
+                <label><input type="radio" name="q45" value="a"> a) Los B2C son empresas, y los B2B son consumidores finales.</label>
+                <label><input type="radio" name="q45" value="b"> b) Los B2C compran para uso personal, y los B2B compran para procesos empresariales.</label>
+                <label><input type="radio" name="q45" value="c"> c) Los B2C buscan solo productos orgánicos, y los B2B buscan productos reciclados.</label>
+                <label><input type="radio" name="q45" value="d"> d) Los B2C no se preocupan por el precio, y los B2B sí.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: B2C (Business to Consumer) se enfoca en la venta al consumidor final. B2B (Business to Business) se refiere a las transacciones entre empresas.</div>
+        </div>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">46. Los **Mercados Verdes** se definen como sistemas de comercio y economía que:</div>
+            <div class="options">
+                <label><input type="radio" name="q46" value="a"> a) Solo incluyen productos agrícolas orgánicos.</label>
+                <label><input type="radio" name="q46" value="b"> b) Priorizan la sostenibilidad ambiental y el uso responsable de los recursos naturales.</label>
+                <label><input type="radio" name="q46" value="c"> c) Se enfocan únicamente en la reducción de costos de producción.</label>
+                <label><input type="radio" name="q46" value="d"> d) Se basan exclusivamente en transacciones Business to Business (B2B).</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: Los Mercados Verdes son sistemas de comercio y economía que priorizan la sostenibilidad ambiental y el uso responsable de los recursos naturales.</div>
+        </div>
+
+        <div class="question-card" data-correct="a">
+            <div class="question-text">47. Una transacción Consumer to Business (C2B) es un tipo de Cliente Verde que existe dentro del Mercado Verde. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q47" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q47" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: La diapositiva "Clientes verdes" lista: B2C, B2B, B2G, C2C, C2B, G2B, y G2C.</div>
+        </div>
+
+        <div class="question-card" data-correct="a">
+            <div class="question-text">48. El componente de **Producción Sostenible** en los Mercados Verdes promueve prácticas para proteger la biodiversidad. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q48" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q48" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: La Producción Sostenible busca promover prácticas que minimicen la contaminación, reduzcan el consumo de recursos naturales y protejan la biodiversidad.</div>
+        </div>
+
+        <div class="question-card" data-correct="d">
+            <div class="question-text">49. Las **Plantas de tratamiento de agua**, el **Material reciclado** y los **Ahorradores de energía** se clasifican como:</div>
+            <div class="options">
+                <label><input type="radio" name="q49" value="a"> a) Productos ecológicos certificados.</label>
+                <label><input type="radio" name="q49" value="b"> b) Productos naturales.</label>
+                <label><input type="radio" name="q49" value="c"> c) Productos de infraestructura sostenible.</label>
+                <label><input type="radio" name="q49" value="d"> d) Productos industriales menos contaminantes.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: Estos elementos se encuentran listados bajo la categoría de Productos industriales menos contaminantes en el diagrama de Productos Verdes.</div>
+        </div>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">50. En la estructura conceptual para la investigación de mercados verdes, ¿cuáles son los dos pasos esenciales que preceden a la definición del Mercadeo Verde Objetivo?</div>
+            <div class="options">
+                <label><input type="radio" name="q50" value="a"> a) El Análisis de Ciclo de Vida y la Auditoría Ambiental.</label>
+                <label><input type="radio" name="q50" value="b"> b) La Categorización de Mercados y la Priorización de Mercados.</label>
+                <label><input type="radio" name="q50" value="c"> c) El Diseño de Políticas y la Inversión de Capital.</label>
+                <label><input type="radio" name="q50" value="d"> d) La Revisión de Normas ISO y la Sustitución de Materiales.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: La estructura conceptual para la investigación de mercados verdes es: Categorización de Mercados, Priorización de Mercados, y finalmente el Mercadeo Verde Objetivo.</div>
+        </div>
+
+        <h2>6. Buenas Prácticas y Mejores Técnicas Ambientales (Preguntas 51-60)</h2>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">51. Una **Buena Práctica Ambiental (BPA)** en el uso de energía operativa se enfoca principalmente en:</div>
+            <div class="options">
+                <label><input type="radio" name="q51" value="a"> a) Instalar sistemas de tratamiento de aguas residuales de alta tecnología.</label>
+                <label><input type="radio" name="q51" value="b"> b) El uso eficiente de equipos existentes, como apagar máquinas en periodos de inactividad.</label>
+                <label><input type="radio" name="q51" value="c"> c) Reemplazar toda la flota de transporte por vehículos eléctricos e híbridos.</label>
+                <label><input type="radio" name="q51" value="d"> d) Contratar servicios de consultoría para elaborar el informe de auditoría ambiental.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: Las BPAs se centran en el cambio de hábitos, el control operativo y el uso eficiente de la infraestructura existente, como apagar equipos para ahorrar energía.</div>
+        </div>
+
+        <div class="question-card" data-correct="a">
+            <div class="question-text">52. Las **Mejores Técnicas Ambientales (MTA)** se definen como la etapa de desarrollo más avanzada de actividades y sus modos de explotación, que permiten alcanzar un alto nivel general de protección del medio ambiente en su conjunto. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q52" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q52" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: Las MTA representan la opción más efectiva y viable a nivel técnico y económico para prevenir o reducir las emisiones y el impacto en el medio ambiente.</div>
+        </div>
+
+        <div class="question-card" data-correct="c">
+            <div class="question-text">53. ¿Cuál es la jerarquía de gestión de residuos preferida dentro de las Buenas Prácticas Ambientales?</div>
+            <div class="options">
+                <label><input type="radio" name="q53" value="a"> a) Reciclaje → Reutilización → Valorización energética.</label>
+                <label><input type="radio" name="q53" value="b"> b) Disposición final → Reciclaje → Reducción.</label>
+                <label><input type="radio" name="q53" value="c"> c) Reducción en la fuente → Reutilización → Reciclaje.</label>
+                <label><input type="radio" name="q53" value="d"> d) Tratamiento → Eliminación → Valorización.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: La jerarquía prioriza la prevención (Reducción) sobre la extensión de vida útil (Reutilización) y la recuperación de valor (Reciclaje).</div>
+        </div>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">54. Una BPA clave para el **uso eficiente del agua** en procesos industriales es la instalación de un sistema de circuito cerrado que reutilice el agua de refrigeración o lavado. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q54" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q54" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: La reutilización de agua en circuitos cerrados es una práctica fundamental de eficiencia hídrica.</div>
+        </div>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">55. En el contexto de las BPAs, ¿por qué es importante el **mantenimiento predictivo y preventivo** de la maquinaria y las instalaciones?</div>
+            <div class="options">
+                <label><input type="radio" name="q55" value="a"> a) Porque aumenta la facturación de la empresa y la producción en un 30%.</label>
+                <label><input type="radio" name="q55" value="b"> b) Porque permite detectar y corregir fallos (fugas, derrames) antes de que causen contaminación o desperdicio de recursos.</label>
+                <label><input type="radio" name="q55" value="c"> c) Porque sustituye totalmente el uso de ecoetiquetas en el producto final.</label>
+                <label><input type="radio" name="q55" value="d"> d) Porque es un requisito exclusivo de la Auditoría Ambiental Gubernamental.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: El mantenimiento adecuado previene pérdidas de energía, agua, y productos químicos (fugas/derrames), siendo esencial para la prevención de la contaminación.</div>
+        </div>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">56. La mejora de la calidad del aire interior, lograda mediante BPAs como la ventilación adecuada y el control de sustancias volátiles, tiene un impacto directo en la salud laboral, lo cual forma parte del pilar social de la sostenibilidad. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q56" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q56" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: La protección de la salud humana es un componente esencial del pilar social, y las BPAs son un medio para lograrlo.</div>
+        </div>
+
+        <div class="question-card" data-correct="a">
+            <div class="question-text">57. Una MTA enfocada en el control de emisiones atmosféricas es aquella que instala tecnología 'al final del proceso' (end-of-pipe), como filtros de partículas o sistemas de depuración de gases. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q57" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q57" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: Las MTA incluyen tanto la prevención en la fuente como las técnicas de tratamiento al final del proceso (end-of-pipe), siempre que sean las más avanzadas y viables.</div>
+        </div>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">58. ¿Cuál de las siguientes técnicas es un ejemplo de **Buena Práctica Ambiental (BPA)** para la gestión de residuos sólidos de bajo impacto y costo?</div>
+            <div class="options">
+                <label><input type="radio" name="q58" value="a"> a) Implementación de un sistema automatizado de clasificación de residuos por infrarrojos.</label>
+                <label><input type="radio" name="q58" value="b"> b) Realizar la separación manual de residuos en la fuente (plástico, papel, orgánico) con contenedores etiquetados.</label>
+                <label><input type="radio" name="q58" value="c"> c) Instalación de una planta de incineración de residuos con recuperación de energía.</label>
+                <label><input type="radio" name="q58" value="d"> d) Utilizar la economía circular para vender el 100% de los residuos a clientes B2B.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: La separación en la fuente es una práctica organizativa, operativa y de bajo costo que recae en la categoría de BPA.</div>
+        </div>
+
+        <div class="question-card" data-correct="b">
+            <div class="question-text">59. En el sector de transporte y logística, la optimización de rutas y la conducción eficiente (ecodriving) se consideran **Mejores Técnicas Ambientales (MTA)** porque requieren una fuerte inversión en software de inteligencia artificial. (Verdadero/Falso)</div>
+            <div class="options">
+                <label><input type="radio" name="q59" value="a"> a) Verdadero</label>
+                <label><input type="radio" name="q59" value="b"> b) Falso</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: La conducción eficiente es una BPA o práctica operativa de bajo costo que se basa en la gestión y formación del conductor, no necesariamente en tecnología avanzada (MTA).</div>
+        </div>
+
+        <div class="question-card" data-correct="c">
+            <div class="question-text">60. ¿Qué acción representa una **Mejor Técnica Ambiental (MTA)** en la industria de la energía que se alinea directamente con la Economía Circular?</div>
+            <div class="options">
+                <label><input type="radio" name="q60" value="a"> a) Mantener apagadas las luces de las oficinas cuando no hay personal (BPA).</label>
+                <label><input type="radio" name="q60" value="b"> b) Instalar medidores de consumo de energía en todos los departamentos.</label>
+                <label><input type="radio" name="q60" value="c"> c) Implementar un sistema de captación y uso de energías renovables (solar, eólica) para la operación.</label>
+                <label><input type="radio" name="q60" value="d"> d) Comprar equipos de oficina certificados con la Ecoetiqueta Tipo I.</label>
+            </div>
+            <div class="justification-display" style="display: none;">Justificación: La transición a energías renovables es una técnica avanzada (MTA) que alinea la producción con el principio de la EC de regenerar los sistemas naturales.</div>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <button type="button" id="submit-button">Finalizar Examen</button>
+        </div>
+    </form>
+
+</div>
+
+<script>
+    // --- LÓGICA DEL EXAMEN ---
+
+    const EXAM_DURATION = 30 * 60; // 30 minutos en segundos
+    let timeLeft = EXAM_DURATION;
+    let timerInterval;
+    const allResults = []; // Almacén de resultados para el informe del docente
+    const totalQuestions = 60; // Actualizado a 60 preguntas
+
+    const examForm = document.getElementById('exam-form');
+    const startForm = document.getElementById('start-form');
+    const startButton = document.getElementById('start-button');
+    const submitButton = document.getElementById('submit-button');
+    const resultsSection = document.getElementById('results');
+    const timerDisplay = document.getElementById('timer');
+    const finalNameDisplay = document.getElementById('final-name');
+    const scoreDisplay = document.getElementById('score-display');
+    const reviewButton = document.getElementById('review-button');
+    const reportSection = document.getElementById('report-section');
+    const reportData = document.getElementById('report-data');
+
+    // 1. Inicializar y Empezar
+    startButton.addEventListener('click', () => {
+        const studentName = document.getElementById('student-name').value.trim();
+        const studentEmail = document.getElementById('student-email').value.trim();
+
+        if (studentName === "" || studentEmail === "" || !studentEmail.includes('@')) {
+            alert("Por favor, introduce tu nombre completo y un correo electrónico válido para comenzar.");
+            return;
+        }
+
+        // Ocultar inicio, mostrar examen
+        startForm.style.display = 'none';
+        examForm.style.display = 'block';
+        finalNameDisplay.textContent = studentName;
+
+        // Iniciar temporizador
+        timerInterval = setInterval(updateTimer, 1000);
+    });
+
+    // 2. Lógica del Temporizador
+    function updateTimer() {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+
+        timerDisplay.textContent = `Tiempo restante: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            alert("¡Tiempo agotado! Tu examen será calificado automáticamente.");
+            calculateScore(true); // Calificar por tiempo
+        } else {
+            timeLeft--;
+        }
+    }
+
+    // 3. Finalizar y Calificar
+    submitButton.addEventListener('click', () => {
+        clearInterval(timerInterval);
+        const confirmation = confirm("¿Estás seguro de que quieres finalizar el examen? Una vez enviado, no podrás modificar tus respuestas.");
+        if (confirmation) {
+            calculateScore(false);
+        } else {
+            // Reanudar el temporizador si el examen no se envió
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+    });
+
+    function calculateScore(timeUp) {
+        examForm.style.display = 'none';
+        resultsSection.style.display = 'block';
+
+        const questionCards = document.querySelectorAll('.question-card');
+        let correctAnswers = 0;
+
+        questionCards.forEach(card => {
+            const questionName = card.querySelector('input[type="radio"]').name;
+            const selectedValue = document.querySelector(`input[name="${questionName}"]:checked`)?.value;
+            const correctAnswer = card.getAttribute('data-correct');
+
+            if (selectedValue === correctAnswer) {
+                correctAnswers++;
+            }
+        });
+
+        // Calcular puntuación sobre 100
+        const scorePercentage = ((correctAnswers / totalQuestions) * 100).toFixed(2);
+        scoreDisplay.innerHTML = `${correctAnswers} de ${totalQuestions} (${scorePercentage}%)`;
+
+        // Almacenar y generar informe
+        storeResultForReport(correctAnswers, totalQuestions, scorePercentage, timeUp);
+    }
+
+    // 4. Revisar Respuestas
+    reviewButton.addEventListener('click', () => {
+        // Mostrar el formulario y desplazar al inicio del examen
+        examForm.style.display = 'block';
+        window.scrollTo(0, 0);
+
+        const questionCards = document.querySelectorAll('.question-card');
+        
+        questionCards.forEach(card => {
+            const questionName = card.querySelector('input[type="radio"]').name;
+            const selectedValue = document.querySelector(`input[name="${questionName}"]:checked`)?.value;
+            const correctAnswer = card.getAttribute('data-correct');
+            
+            // Deshabilitar todas las opciones
+            card.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.disabled = true;
+                const label = radio.parentNode;
+
+                // Mostrar justificación
+                card.querySelector('.justification-display').style.display = 'block';
+
+                // Marcar respuesta del estudiante
+                if (radio.value === selectedValue) {
+                    label.classList.add(selectedValue === correctAnswer ? 'correct' : 'incorrect');
+                }
+
+                // Mostrar respuesta correcta si no fue seleccionada
+                if (radio.value === correctAnswer) {
+                    label.classList.add('correct');
+                }
+            });
+        });
+        reviewButton.style.display = 'none'; // Ocultar el botón de revisión después de usarlo
+        alert("El examen se ha desbloqueado para revisión. Las respuestas correctas están marcadas en verde y las incorrectas que seleccionaste, en rojo. Se muestra la justificación debajo de cada pregunta.");
+    });
+
+    // 5. Informe para el Docente (Simulado en Consola y en Página)
+    function storeResultForReport(correct, total, percentage, timeUp) {
+        const studentName = document.getElementById('student-name').value.trim();
+        const studentEmail = document.getElementById('student-email').value.trim();
+        const finalTime = timeUp ? '00:00 (Tiempo agotado)' : timerDisplay.textContent.replace('Tiempo restante: ', '');
+
+        const result = {
+            name: studentName,
+            email: studentEmail,
+            score: `${correct}/${total}`,
+            percentage: percentage,
+            time_taken: finalTime,
+            date: new Date().toLocaleString()
+        };
+
+        allResults.push(result);
+
+        // Mostrar sección de informe en la página
+        reportSection.style.display = 'block';
+        generateReportTable(allResults);
+
+        // Informe detallado en la consola (para el docente)
+        console.log("--- INFORME PARA EL DOCENTE ---");
+        console.table(allResults);
+        console.log("-------------------------------");
+    }
+
+    // Función para generar la tabla de resultados
+    function generateReportTable(results) {
+        reportData.innerHTML = `
+            <tr>
+                <th>Fecha/Hora</th>
+                <th>Nombre Completo</th>
+                <th>Email</th>
+                <th>Puntuación</th>
+                <th>Porcentaje</th>
+                <th>Tiempo Restante</th>
+            </tr>
+        `;
+        results.forEach(res => {
+            const row = reportData.insertRow();
+            row.insertCell().textContent = res.date;
+            row.insertCell().textContent = res.name;
+            row.insertCell().textContent = res.email;
+            row.insertCell().textContent = res.score;
+            row.insertCell().textContent = res.percentage + '%';
+            row.insertCell().textContent = res.time_taken;
+        });
+    }
+
+    // Inicializar el tiempo restante
+    updateTimer(); 
+</script>
+
+</body>
+</html>
